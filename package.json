@@ -1,0 +1,34 @@
+{
+  "name": "predictive-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Electron app for objective-driven, simulation-based agent orchestration across Anthropic, OpenAI, Gemini, DeepSeek, and GLM.",
+  "main": "dist-electron/electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:main\" \"npm:dev:launch\"",
+    "dev:renderer": "vite --host 127.0.0.1",
+    "dev:main": "tsc -p tsconfig.electron.json --watch --preserveWatchOutput",
+    "dev:launch": "wait-on http://127.0.0.1:5173 dist-electron/electron/main.js && ELECTRON_RENDERER_URL=http://127.0.0.1:5173 electron .",
+    "build": "tsc -p tsconfig.electron.json && vite build",
+    "preview": "npm run build && electron .",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.184.1",
+    "@vitejs/plugin-react": "^6.0.2",
+    "concurrently": "^9.1.0",
+    "electron": "^42.1.0",
+    "typescript": "^5.6.3",
+    "vite": "^8.0.13",
+    "wait-on": "^8.0.1"
+  }
+}
